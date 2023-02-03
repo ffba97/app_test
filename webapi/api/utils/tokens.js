@@ -7,23 +7,27 @@ const addToken = (user, token) => {
   _tokens.push({ user, token });
 };
 
-const deleteToken = (user) => {
-  _tokens = _tokens.filter((json) => {
-    json.user !== user;
-  });
+const deleteToken = (u) => {
+  try {
+    _tokens = _tokens.filter((par) => {
+      const { user } = par;
+      return user.id !== u.id;
+    });
+  } catch (error) {}
 };
 
 export const createToken = (user) => {
   const token = jwt.sign({ id: user.id }, KEY, {
     algorithm: "HS256",
   });
+
   deleteToken(user);
   addToken(user, token);
   return { user, token };
 };
 
-export const validateToken = (token) => {
-  return jwt.verify(token, KEY.secret);
+export const verifyToken = (token) => {
+  return jwt.verify(token, KEY);
 };
 
 export const getAllTokens = () => {
