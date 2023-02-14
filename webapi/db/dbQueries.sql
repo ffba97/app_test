@@ -12,7 +12,7 @@ CREATE TABLE users(
     id_rol INT NOT NULL,
     FOREIGN KEY (id_rol) REFERENCES roles(id),
 	CONSTRAINT user_username UNIQUE (username),
-	CONSTRAINT user_username UNIQUE (email)
+	CONSTRAINT user_email UNIQUE (email)
 
 );
 
@@ -60,3 +60,5 @@ LANGUAGE SQL
 AS $$
 INSERT INTO users(username,password,email,id_rol) VALUES(usr_name,usr_pass,usr_email,usr_rol)
 $$;
+
+INSERT INTO roles(rolname) VALUES("administrador"),("usuario");

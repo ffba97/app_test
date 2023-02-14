@@ -23,7 +23,7 @@ export const createToken = (user) => {
 
   deleteToken(user);
   addToken(user, token);
-  return { user, token };
+  return token;
 };
 
 export const verifyToken = (token) => {

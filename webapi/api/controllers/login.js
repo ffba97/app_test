@@ -5,23 +5,9 @@ import { createToken, verifyToken } from "../utils/tokens.js";
 
 export const login = async (req, res) => {
   try {
-    const { email, password, tokenlogin } = req.body;
+    const { email, password } = req.body;
     const errors = validationResult(req);
 
-    // Si tenenoms token de login, verificamos
-    if (tokenlogin) {
-      // Si el token es valido, tendra el id del usuario dentro
-      const { id } = verifyToken(tokenlogin);
-      // si el id no existe, entonces el token es invalido
-      if (id) {
-        // obtenemos el usuario que posee el id
-        const user = await getUserById(id);
-        // devolvemos el usuario
-        if (user) {
-          return res.send(user);
-        }
-      }
-    }
     // Si no tenemos ningun token, vemos si los campos estan completos
     if (!errors.isEmpty()) {
       const { msg } = errors.errors[0];
@@ -41,3 +27,4 @@ export const login = async (req, res) => {
     res.send(error.message).status(500);
   }
 };
+
