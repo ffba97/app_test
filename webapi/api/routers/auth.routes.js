@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { check } from "express-validator";
-import { login } from "../controllers/login.js";
+import { authToken, login } from "../controllers/auth.js";
 
 const router = Router();
 
@@ -14,5 +14,9 @@ router.post("/login", [
 ],
 login
 );
+
+router.post("/verify",
+  authToken
+)
 
 export default router;

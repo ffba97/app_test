@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import { PORT } from "./config.js";
 import { pool } from "./db/db.js";
 import userRouter from "./api/routers/users.routes.js";
-import loginRouter from "./api/routers/login.routes.js";
+import authRouter from "./api/routers/auth.routes.js";
 import signupRouter from "./api/routers/signup.routes.js"
 import bcrypt from "bcrypt";
 
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(userRouter);
-app.use(loginRouter);
+app.use(authRouter);
 app.use(signupRouter)
 
 app.get("/", async (req, res) => {

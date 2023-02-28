@@ -20,7 +20,6 @@ export const createToken = (user) => {
   const token = jwt.sign({ id: user.id }, KEY, {
     algorithm: "HS256",
   });
-
   deleteToken(user);
   addToken(user, token);
   return token;
