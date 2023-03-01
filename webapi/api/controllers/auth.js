@@ -30,19 +30,25 @@ export const login = async (req, res) => {
 };
 
 // Valida el token y devuelve el obj usuario perteneciente
-export const authToken = async (req, res) => {
+export const authentication = async (req, res) => {
   try {
     const { tkn } = req.headers;
+    const result = auth(tkn);
+
+    res.json(result);
+  } catch (error) {
+    res.send(error.message).status(500);
+  }
+};
+
+export const authTkn = async (tkn) => {
+  try {
     const verify = verifyToken(tkn);
     if (!verify.id) {
       return res.send("Token invalido");
     }
-
-    const user = await getUserById(verify.id);
-
-    console.log(user);
-    res.json(user);
+    return verify;
   } catch (error) {
-    res.send(error.message).status(500);
+    console.log(error.message);
   }
 };

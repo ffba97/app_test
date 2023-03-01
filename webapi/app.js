@@ -1,11 +1,10 @@
 import express from "express";
-import bodyParser from "body-parser";
-import { PORT } from "./config.js";
-import { pool } from "./db/db.js";
 import userRouter from "./api/routers/users.routes.js";
 import authRouter from "./api/routers/auth.routes.js";
 import signupRouter from "./api/routers/signup.routes.js"
-import bcrypt from "bcrypt";
+import postsRouter from "./api/routers/posts.routes.js"
+import bodyParser from "body-parser";
+import { PORT } from "./config.js";
 
 
 const app = express();
@@ -18,7 +17,8 @@ app.use(bodyParser.json());
 
 app.use(userRouter);
 app.use(authRouter);
-app.use(signupRouter)
+app.use(signupRouter);
+app.use(postsRouter);
 
 app.get("/", async (req, res) => {
   res.send('Hello world').status(200)

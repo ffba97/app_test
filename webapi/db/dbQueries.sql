@@ -63,7 +63,7 @@ INNER JOIN roles ON users.id_rol=roles.id;
 CREATE PROCEDURE newUser(usr_name VARCHAR(20),  usr_pass VARCHAR(255), usr_email VARCHAR(255) , usr_rol INT)
 LANGUAGE SQL
 AS $$
-INSERT INTO users(username,password,email,id_rol) VALUES(usr_name,usr_pass,usr_email,usr_rol)
+INSERT INTO users(username,password,email,id_rol, n_posts, n_comments) VALUES(usr_name,usr_pass,usr_email,usr_rol, 0 ,0 )
 $$;
 
 CREATE PROCEDURE newPost(IN title VARCHAR(50), IN content TEXT, IN id_user INT)
@@ -74,7 +74,7 @@ $$
 
 
 
-INSERT INTO roles(rolname) VALUES("administrador"),("usuario");
+INSERT INTO roles(rolname) VALUES('administrador'),('usuario');
 
 CREATE FUNCTION getPostsUser(IN user_id INT, id_base INT, max INT) 
 RETURNS TABLE (id INT, title VARCHAR(50), author VARCHAR(20), release DATE)

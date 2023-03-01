@@ -1,4 +1,5 @@
 import { ENCRYPT_ROUNDS } from "../../config.js";
+import { validationResult } from "express-validator";
 import bcrypt from "bcrypt";
 import { pool } from "../../db/db.js";
 
@@ -8,6 +9,11 @@ export const signupGet = (req, res) => {
 
 export const signup = async (req, res) => {
   try {
+    // const {error} = validationResult(req);
+    // console.log(error)
+    // if(!errors){
+    //   return res.send(error)
+    // }
     const { username, password, email, id_rol } = req.body;             // Extrae mos los datos del formulario
     const passwordEncrypt = bcrypt.hashSync(password, ENCRYPT_ROUNDS);  // Encripta la contraseña para guardar en la BD
     await pool.query("call newUser($1,$2,$3,$4)", [
