@@ -33,8 +33,7 @@ export const login = async (req, res) => {
 export const authentication = async (req, res) => {
   try {
     const { tkn } = req.headers;
-    const result = auth(tkn);
-
+    const result = await authTkn(tkn);
     res.json(result);
   } catch (error) {
     res.send(error.message).status(500);
@@ -44,9 +43,11 @@ export const authentication = async (req, res) => {
 export const authTkn = async (tkn) => {
   try {
     const verify = verifyToken(tkn);
+
     if (!verify.id) {
       return res.send("Token invalido");
     }
+
     return verify;
   } catch (error) {
     console.log(error.message);

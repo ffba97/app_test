@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { KEY } from "../../config.js";
+import { promise } from "bcrypt/promises.js";
 
 let _tokens = [];
 
@@ -19,6 +20,7 @@ const deleteToken = (u) => {
 export const createToken = (user) => {
   const token = jwt.sign({ id: user.id }, KEY, {
     algorithm: "HS256",
+    expiresIn: "15d",
   });
   deleteToken(user);
   addToken(user, token);

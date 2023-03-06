@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { getPosts, newPost } from "../controllers/posts.js";
+import {getPost, getPosts, newPost } from "../controllers/posts.js";
 import { check } from "express-validator";
 const router = Router();
 
 router.get('/posts/', getPosts);
-router.get('/posts/:p', getPosts);
+router.get('/post/:id', getPost);
 router.post('/posts',
 [
     check('title', 'Se necesita un titulo').not().isEmpty() ,
